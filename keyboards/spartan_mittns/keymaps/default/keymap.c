@@ -11,6 +11,35 @@ const uint16_t HM_J = MT(MOD_RSFT,KC_J);
 const uint16_t HM_K = MT(MOD_RCTL,KC_K);
 const uint16_t HM_L = MT(MOD_RALT,KC_L);
 
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case HM_A:
+            return false;
+        default:
+            return true;
+    }
+}
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case HM_A:
+            return 200;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (layer_state_cmp(state, 1) && matrix_is_on(7,1)) {
+        register_code(KC_RSFT);
+    }
+
+    // failsafe so we don't accidentally stick the shift key
+    if (layer_state_cmp(state, 0)) {
+        // there's an edge case here where we unregister a physically held shift
+        unregister_code(KC_RSFT);
+    }
+    return state;
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      /*
@@ -31,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,     KC_W,    KC_E,   KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,          KC_BSPC,
         KC_LSFT, HM_A,     HM_S,    HM_D,   HM_F,    KC_G,                               KC_H,    HM_J,    HM_K,    HM_L,    KC_SCLN, LT(4,KC_QUOT),
         KC_LCTL, KC_Z,     KC_X,    KC_C,   KC_V,    KC_B,                               KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,       KC_RCTL,
-                                    KC_LALT, LT(1,KC_SPC), LT(2,KC_ESC),        LT(2,KC_BSPC),  LT(1,KC_ENT),  KC_RALT
+                                    KC_LALT, LT(1,KC_SPC), LT(2,KC_ESC),        LT(2,KC_BSPC),  LT(1,KC_ENT),  KC_RSFT
     ),
     [1] = LAYOUT_split_3x6_3(
         _______, KC_TAB,   KC_7,    KC_8,   KC_9,    KC_EQL,                             _______, _______, _______, _______, _______, _______,

@@ -21,8 +21,9 @@
     "tapping": {
         "hold_on_other_key_press": false,
         "permissive_hold": true,
+        "permissive_hold_per_key": true,
         "term": 170,
-        "term_per_key": false
+        "term_per_key": true
     },
     "matrix_size" : {
         "cols": 6,
