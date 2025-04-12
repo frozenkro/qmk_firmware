@@ -23,6 +23,14 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HM_A:
             return 200;
+        case HM_F:
+            return 100;
+        case HM_J:
+            return 100;
+        case HM_K:
+            return 170;
+        case HM_D:
+            return 170;
         default:
             return TAPPING_TERM;
     }
@@ -66,12 +74,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_TAB,   KC_7,    KC_8,   KC_9,    KC_EQL,                             _______, _______, _______, _______, _______, _______,
         _______, KC_TAB,   KC_4,    KC_5,   KC_6,    KC_0,                               KC_LBRC, KC_9,    KC_0,    KC_RBRC, _______, KC_GRV,
         _______, _______,  KC_1,    KC_2,   KC_3,    KC_MINS,                            _______, KC_QUOT, KC_GRV,  _______, KC_BSLS, _______,
-                                            KC_LGUI, _______, _______,          KC_DEL,  _______,  _______
+                                            KC_LGUI, _______, _______,          KC_DEL,  KC_SPC,  _______
     ),
     [2] = LAYOUT_split_3x6_3(
         _______, KC_VOLU,  KC_F7,   KC_F8,  KC_F9,   KC_F10,                             _______, _______, _______, _______, KC_PGUP, _______,
         _______, KC_VOLD,  KC_F4,   KC_F5,  KC_F6,   KC_F11,                             KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, KC_CAPS,
-        _______, KC_MUTE,  KC_F1,   KC_F2,  KC_F3,   KC_F12,                             KC_PGDN, _______, _______, _______, _______, _______,
+        _______, KC_MUTE,  KC_F1,   KC_F2,  KC_F3,   KC_F12,                             KC_PGDN, _______, _______, _______, _______, KC_PSCR,
                                             _______, _______, _______,          _______, _______, _______
     ),
     /*
@@ -81,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,                               _______, _______, _______, _______, _______, _______,
         _______, KC_LSFT,  KC_A,    KC_S,    KC_D,    KC_F,                               _______, _______, _______, _______, _______, LT(4,KC_SCLN),
         _______, KC_LCTL,  KC_Z,    KC_X,    KC_C,    KC_V,                               _______, _______, _______, _______, _______, _______,
-                                            _______, _______, _______, _______,  _______,  _______
+                                            KC_LCTL, KC_SPC, _______, _______,  _______,  _______
     ),
     /*
      * Keyboard specific function layer
